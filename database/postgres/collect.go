@@ -1,10 +1,6 @@
 package postgres
 
-import (
-	"errors"
-
-	"github.com/jackc/pgx/v5"
-)
+import "github.com/jackc/pgx/v5"
 
 // CollectOne scans a single row into T using struct field name matching.
 // Returns nil, nil if no rows are found.
@@ -16,9 +12,6 @@ func CollectOne[T any](rows pgx.Rows, err error) (*T, error) {
 
 	v, err := pgx.CollectOneRow(rows, pgx.RowToStructByNameLax[T])
 	if err != nil {
-		if errors.Is(err, pgx.ErrNoRows) {
-			return nil, nil
-		}
 		return nil, err
 	}
 
@@ -52,9 +45,6 @@ func CollectOneScalar[T any](rows pgx.Rows, err error) (T, error) {
 
 	v, err := pgx.CollectOneRow(rows, pgx.RowTo[T])
 	if err != nil {
-		if errors.Is(err, pgx.ErrNoRows) {
-			return zero, nil
-		}
 		return zero, err
 	}
 
