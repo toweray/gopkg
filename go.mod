@@ -9,6 +9,7 @@ require (
 	github.com/jackc/pgx/v5 v5.8.0
 	github.com/pelletier/go-toml/v2 v2.2.4
 	github.com/phuslu/iploc v1.0.20260215
+	github.com/rabbitmq/amqp091-go v1.11.0
 	github.com/redis/go-redis/v9 v9.18.0
 	go.uber.org/zap v1.27.1
 	golang.org/x/crypto v0.48.0
