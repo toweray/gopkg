@@ -26,6 +26,15 @@ func WithMinConns(n int32) Option {
 	}
 }
 
+// WithAfterConnect sets a callback that is called after each new connection
+// is established. Use it to register custom PostgreSQL types (enums, etc.)
+// so pgx can encode and decode them correctly.
+func WithAfterConnect(fn func(context.Context, *pgx.Conn) error) Option {
+	return func(c *pgxpool.Config) {
+		c.AfterConnect = fn
+	}
+}
+
 // Postgres wraps a pgxpool.Pool and implements DB.
 type Postgres struct {
 	Pool *pgxpool.Pool
